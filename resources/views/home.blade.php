@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Ordenes de compra')
+@section('title', 'Remisiones')
 
 @section('content_header')
-<h1>Ordenes de compra</h1>
+<h1>Remisiones</h1>
 @stop
 
 @section('content')
@@ -24,11 +24,9 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>ID (OT) / ID (RQ) / ID (OS)</th>
+							<th>ID (OT)</th>
+							<th>Fecha de Recibido</th>
 							<th>Proveedor</th>
-							<th>Formas de pago</th>
-							<th>Notas</th>
-							<th>Fecha</th>
 							<th>Items</th>
 						</tr>
 					</thead>
@@ -38,21 +36,17 @@
 							<td>asd</td>
 							<td>asd</td>
 							<td>asd</td>
-							<td>asd</td>
-							<td>asd</td>
 							<td>
-								<a href="#" class="btn btn-flat btn-block btn-primary" role="button" data-toggle="modal" data-target="#myModal">Ver Items</a>
+								<a href="#" class="btn btn-flat btn-primary" role="button" data-toggle="modal" data-target="#myModal">Ver items</a>
 							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
 							<th>ID</th>
-							<th>ID (OT) / ID (RQ) / ID (OS)</th>
+							<th>ID (OT)</th>
+							<th>Fecha de Recibido</th>
 							<th>Proveedor</th>
-							<th>Formas de pago</th>
-							<th>Notas</th>
-							<th>Fecha</th>
 							<th>Items</th>
 						</tr>
 					</tfoot>
@@ -79,8 +73,8 @@
 										<th>ID</th>
 										<th>Código</th>
 										<th>Descripción</th>
-										<th>Fecha</th>
-										<th>Cantidad</th>
+										<th>Producto</th>
+										<th>Nota</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -97,8 +91,8 @@
 										<th>ID</th>
 										<th>Código</th>
 										<th>Descripción</th>
-										<th>Fecha</th>
-										<th>Cantidad</th>
+										<th>Producto</th>
+										<th>Nota</th>
 									</tr>
 								</tfoot>
 							</table>
