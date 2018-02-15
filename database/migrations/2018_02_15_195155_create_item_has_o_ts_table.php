@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateREsTable extends Migration
+class CreateItemHasOTsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateREsTable extends Migration
      */
     public function up()
     {
-        Schema::create('r_es', function (Blueprint $table) {
-
+        Schema::create('item_has_o_ts', function (Blueprint $table) {
             $table->increments('id');
-
+            
             $table->integer('ot_id')->unsigned();
-            $table->string('proveedor');
-            $table->dateTime('fecha');
-            $table->timestamps();
+            $table->integer('item_id')->unsigned();
+            $table->string('cantidad');
+            $table->dateTime('fecha_entrega');
 
             $table->foreign('ot_id')->references('id')->on('o_ts');
+            $table->foreign('item_id')->references('id')->on('items');
+
+            $table->timestamps();
         });
     }
 
@@ -33,6 +35,6 @@ class CreateREsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('r_es');
+        Schema::dropIfExists('item_has_o_ts');
     }
 }

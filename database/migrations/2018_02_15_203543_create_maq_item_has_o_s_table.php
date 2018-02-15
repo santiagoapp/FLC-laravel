@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOCsTable extends Migration
+class CreateMaqItemHasOSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreateOCsTable extends Migration
      */
     public function up()
     {
-        Schema::create('o_cs', function (Blueprint $table) {
+        Schema::create('maq_item_has_o_s', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('proveedor');
-            $table->string('pago');
-            $table->string('nota');
+            $table->integer('os_id')->unsigned();
+            $table->integer('item_id')->unsigned();
+
+            $table->string('cantidad');
             $table->dateTime('fecha');
-            $table->morphs('oc'); //la clave de todo
 
             $table->timestamps();
+            
+            $table->foreign('os_id')->references('id')->on('o_s');
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 
@@ -33,6 +36,6 @@ class CreateOCsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('o_cs');
+        Schema::dropIfExists('maq_item_has_o_s');
     }
 }

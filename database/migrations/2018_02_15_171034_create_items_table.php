@@ -18,8 +18,9 @@ class CreateItemsTable extends Migration
 
             $table->string('codigo');
             $table->string('descripcion');
-            
+            $table->string('existencias');
             $table->timestamps();
+
         });
     }
 
