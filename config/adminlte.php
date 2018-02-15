@@ -175,37 +175,37 @@ return [
             'submenu' => [
                 [
                     'text'        => 'Ordenes de trabajo',
-                    'url'         => 'admin/OT',
+                    'url'         => 'OT',
                     'icon'        => 'file-text',
                     'label_color' => 'success',
                 ],
                 [
                     'text'        => 'Requisiciones',
-                    'url'         => 'admin/RQ',
+                    'url'         => 'RQ',
                     'icon'        => 'file-text',
                     'label_color' => 'success',
                 ],
                 [
                     'text'        => 'Ordenes de Compra',
-                    'url'         => 'admin/OC',
+                    'url'         => 'OC',
                     'icon'        => 'file-text',
                     'label_color' => 'success',
                 ],
                 [
                     'text'        => 'Ordenes de Servicio',
-                    'url'         => 'admin/OS',
+                    'url'         => 'OS',
                     'icon'        => 'file-text',
                     'label_color' => 'success',
                 ],
                 [
                     'text'        => 'Entradas',
-                    'url'         => 'admin/RE',
+                    'url'         => 'RE',
                     'icon'        => 'file-text',
                     'label_color' => 'success',
                 ],
                 [
                     'text'        => 'Remisiones',
-                    'url'         => 'admin/RV',
+                    'url'         => 'RV',
                     'icon'        => 'file-text',
                     'label_color' => 'success',
                 ],

@@ -18,4 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/datos/OT', 'OTController@index')->name('OT');
+
+Route::group( ['middleware' => ['auth']], function() {
+	Route::resource('OT', 'OTController');
+	Route::resource('RQ', 'RQController');
+	Route::resource('OC', 'OCController');
+	Route::resource('OS', 'OSController');
+	Route::resource('RE', 'REController');
+	Route::resource('RV', 'RVController');
+});

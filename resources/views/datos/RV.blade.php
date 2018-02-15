@@ -3,7 +3,7 @@
 @section('title', 'Inicio')
 
 @section('content_header')
-<h1>Dashboard</h1>
+<h1>Remisiones</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,6 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="row">
-
 					<div class="col-md-10">
 						<h3 class="box-title">Registros</h3>
 					</div>
@@ -28,7 +27,7 @@
 							<th>Fecha de expedicion</th>
 							<th>Fecha de Vencimiento</th>
 							<th>Cliente</th>
-							<th>Items</th>>
+							<th>Items</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -107,8 +106,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				@include('partials.botones_modal')
 			</div>
 		</div>
 	</div>
@@ -140,7 +138,7 @@
 			],
 			'paging'      : true,
 			'lengthChange': false,
-			'searching'   : true,
+			'searching'   : false,
 			'ordering'    : true,
 			'info'        : true,
 			'autoWidth'   : true

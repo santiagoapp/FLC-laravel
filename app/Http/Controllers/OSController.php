@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 class OSController extends Controller
 {
     /**
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('datos.OS');
     }
 
     /**
