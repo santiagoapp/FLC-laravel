@@ -48,7 +48,7 @@
 
     @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
-    <script src="{{ asset('vendor/adminlte/vendor/select2/js/select2.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/select2/js/select2.min.js') }}"></script>
     @endif
 
     @if(config('adminlte.plugins.datatables'))
