@@ -20,10 +20,17 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group( ['middleware' => ['auth']], function() {
+	Route::resource('home', 'HomeController');
+	Route::resource('calendario', 'CalendarioController');
+	Route::resource('items', 'ItemController');
+	Route::resource('users', 'UserController');
+	Route::resource('estadisticas/generales', 'EstadisticasController');
 	Route::resource('OT', 'OTController');
 	Route::resource('RQ', 'RQController');
 	Route::resource('OC', 'OCController');
 	Route::resource('OS', 'OSController');
 	Route::resource('RE', 'REController');
 	Route::resource('RV', 'RVController');
+	Route::post('users/add','UserController@agregarPermiso');
+	Route::post('users/remove','UserController@eliminarPermiso');
 });

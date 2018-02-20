@@ -3,18 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ItemHasRQ;
+use App\RQ;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $result = ItemHasRQ::all();
+        // $result = RQ::whereDate('fecha', '>' ,'2016-12-31')->get();
+
+        return view('home',compact('result'));
     }
 }

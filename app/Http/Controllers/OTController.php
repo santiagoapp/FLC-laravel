@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\OT;
+use App\ItemHasOT;
+use App\Item;
 use Illuminate\Http\Request;
 
 class OTController extends Controller
@@ -15,7 +17,8 @@ class OTController extends Controller
      */
     public function index()
     {
-        return view('datos.OT');
+        $result = OT::paginate(15);
+        return view('datos.OT',compact('result'));
     }
 
     /**
@@ -47,7 +50,26 @@ class OTController extends Controller
      */
     public function show(OT $oT)
     {
-        //
+        $arr = array();
+
+        $url = url()->current();
+        $url_array = explode('/', $url);
+        $orden = $url_array[count($url_array)-1];
+        
+        $result = ItemHasOT::where('ot_id',$orden)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+            
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['fecha_entrega'][] = $res->fecha_entrega;
+            $arr['existencias'][] = $item->existencias;
+        }
+
+        return response()->json($arr);
     }
 
     /**

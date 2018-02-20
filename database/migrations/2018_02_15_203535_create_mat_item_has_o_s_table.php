@@ -21,7 +21,7 @@ class CreateMatItemHasOSTable extends Migration
             $table->integer('item_id')->unsigned();
 
             $table->string('cantidad');
-            $table->integer('estado');
+            $table->string('estado');
 
             $table->timestamps();
             

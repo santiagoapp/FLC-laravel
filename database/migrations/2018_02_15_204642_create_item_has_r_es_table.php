@@ -19,7 +19,6 @@ class CreateItemHasREsTable extends Migration
             $table->integer('re_id')->unsigned();
             $table->integer('item_id')->unsigned();
 
-            $table->string('producto');
             $table->string('nota');
 
             $table->timestamps();

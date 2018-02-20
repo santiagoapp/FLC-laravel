@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Remisiones')
+@section('title', 'Entradas')
 
 @section('content_header')
-<h1>Remisiones</h1>
+<h1>Entradas</h1>
 @stop
 
 @section('content')
@@ -109,21 +109,7 @@
 @stop
 
 @section('js')
-<script>
-	$(function () {
-		$('#example2').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
-			'paging'      : true,
-			'lengthChange': true,
-			'searching'   : true,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : true
-		})
-	})
-</script>
+
 
 <script>
 	$(function () {

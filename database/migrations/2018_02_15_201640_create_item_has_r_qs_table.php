@@ -24,7 +24,6 @@ class CreateItemHasRQsTable extends Migration
             $table->boolean('compra');
             $table->boolean('servicio');
             $table->string('estado');
-            $table->string('existencia');
             $table->dateTime('fecha');
 
             $table->timestamps();

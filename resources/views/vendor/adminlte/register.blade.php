@@ -11,6 +11,7 @@
 <div class="register-box">
     <div class="register-logo">
         <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}"><img src="{{asset('img/logo.png')}}" alt="" width="340px"></a>
+        
     </div>
 
     <div class="register-box-body">

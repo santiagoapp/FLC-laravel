@@ -114,21 +114,7 @@
 @stop
 
 @section('js')
-<script>
-	$(function () {
-		$('#example2').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
-			'paging'      : true,
-			'lengthChange': true,
-			'searching'   : true,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : true
-		})
-	})
-</script>
+
 
 <script>
 	$(function () {

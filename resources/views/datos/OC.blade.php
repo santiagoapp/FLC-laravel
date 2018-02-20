@@ -118,9 +118,6 @@
 <script>
 	$(function () {
 		$('#example2').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
 			'paging'      : true,
 			'lengthChange': true,
 			'searching'   : true,
@@ -134,9 +131,6 @@
 <script>
 	$(function () {
 		$('#modal-table').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
 			'paging'      : true,
 			'lengthChange': false,
 			'searching'   : false,

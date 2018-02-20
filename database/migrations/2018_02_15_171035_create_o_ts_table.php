@@ -24,6 +24,7 @@ class CreateOTsTable extends Migration
             $table->string('transporte');
 
             $table->timestamps();
+            
         });
     }
 

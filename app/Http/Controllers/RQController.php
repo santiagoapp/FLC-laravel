@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\RQ;
+use App\ItemHasRQ;
+use App\Item;
 use Illuminate\Http\Request;
 
 class RQController extends Controller
@@ -15,7 +17,8 @@ class RQController extends Controller
      */
     public function index()
     {
-        return view('datos.RQ');
+        $result = RQ::paginate(15);
+        return view('datos.RQ',compact('result'));
     }
 
     /**
@@ -47,7 +50,32 @@ class RQController extends Controller
      */
     public function show(RQ $rQ)
     {
-        //
+        $arr = array();
+
+        $url = url()->current();
+        $url_array = explode('/', $url);
+        $requisicion = $url_array[count($url_array)-1];
+        
+        $result = ItemHasRQ::where('rq_id',$requisicion)->get();
+
+        foreach ($result as $res) {
+
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['compra'][] = $res->compra;
+            $arr['servicio'][] = $res->servicio;
+            $arr['estado'][] = $res->estado;
+            $arr['existencias'][] = $item->existencias;
+            $arr['fecha'][] = $res->fecha;
+
+        }
+
+        return response()->json($arr);
+        // return $requisicion;
     }
 
     /**

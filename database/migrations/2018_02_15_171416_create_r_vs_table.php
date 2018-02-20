@@ -16,10 +16,13 @@ class CreateRVsTable extends Migration
         Schema::create('r_vs', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('ot_id')->unsigned();
             $table->dateTime('expedicion');
             $table->dateTime('vencimiento');
 
             $table->timestamps();
+
+            $table->foreign('ot_id')->references('id')->on('o_ts');
         });
     }
 

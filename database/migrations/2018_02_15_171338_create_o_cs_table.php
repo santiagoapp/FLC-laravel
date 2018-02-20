@@ -16,6 +16,7 @@ class CreateOCsTable extends Migration
         Schema::create('o_cs', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('rq_id')->unsigned();
             $table->string('proveedor');
             $table->string('pago');
             $table->string('nota');

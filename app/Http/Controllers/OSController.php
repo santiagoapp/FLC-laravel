@@ -16,8 +16,9 @@ class OSController extends Controller
      */
     public function index()
     {
-        return view('datos.OS');
-    }
+       $result = OS::paginate(15);
+       return view('datos.OS',compact('result'));
+   }
 
     /**
      * Show the form for creating a new resource.

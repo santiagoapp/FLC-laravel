@@ -20,45 +20,88 @@
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4" style="margin-top: 20px;">
+							<!-- search form -->
+							<form action="#" method="get">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Buscar...">
+									<span class="input-group-btn">
+										<button type="submit" name="search" class="btn btn-flat"><i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</form>
+							<!-- /.search form -->
+						</div>
+						<div class="col-md-5 col-md-offset-1">
+							{{$result->links()}}
+						</div>
+					</div>
+				</div>
 				<table id="example2" class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>ID (RQ)</th>
 							<th>Proveedor</th>
-							<th>Formas de pago</th>
+							<th>Formas de Pago</th>
 							<th>Notas</th>
 							<th>Fecha</th>
 							<th>Items</th>
 						</tr>
 					</thead>
 					<tbody>
+						@foreach($result as $OSReg)
 						<tr>
-							<td>asd</td>
-							<td>asd</td>
-							<td>asd</td>
-							<td>asd</td>
-							<td>asd</td>
-							<td>asd</td>
+							<td>{{ $OSReg->id }}</td>
+							<td>{{ $OSReg->rq_id}}</td>
+							<td>{{ $OSReg->proveedor }}</td>
+							<td>{{ $OSReg->pago }}</td>
+							<td>{{ $OSReg->notas }}</td>
+							<td>{{ $OSReg->fecha }}</td>
 							<td>
-								<a href="#" class="btn btn-flat btn-primary" role="button" data-toggle="modal" data-target="#Modal1">P. Final</a>
-								<a href="#" class="btn btn-flat btn-primary" role="button" data-toggle="modal" data-target="#Modal2">Material</a>
-								<a href="#" class="btn btn-flat btn-primary" role="button" data-toggle="modal" data-target="#Modal3">Servicio</a>
+								<a id="boton-{{ $OSReg->id }}" class="btn btn-flat btn-block btn-info boton" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items P. Final</a>
+								<a id="boton-{{ $OSReg->id }}" class="btn btn-flat btn-block btn-info boton" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items Material</a>
+								<a id="boton-{{ $OSReg->id }}" class="btn btn-flat btn-block btn-info boton" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items Servicio</a>
 							</td>
 						</tr>
+						@endforeach
 					</tbody>
 					<tfoot>
 						<tr>
 							<th>ID</th>
 							<th>ID (RQ)</th>
 							<th>Proveedor</th>
-							<th>Formas de pago</th>
+							<th>Formas de Pago</th>
 							<th>Notas</th>
 							<th>Fecha</th>
 							<th>Items</th>
 						</tr>
 					</tfoot>
 				</table>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4" style="margin-top: 20px;">
+
+							<!-- search form -->
+							<form action="#" method="get">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Buscar...">
+									<span class="input-group-btn">
+										<button type="submit" name="search" class="btn btn-flat"><i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</form>
+							<!-- /.search form -->
+						</div>
+						<div class="col-md-5 col-md-offset-1">
+							{{$result->links()}}
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -225,22 +268,6 @@
 @stop
 
 @section('js')
-<script>
-	$(function () {
-		$('#example2').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
-			'paging'      : true,
-			'lengthChange': true,
-			'searching'   : true,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : true
-		})
-	})
-</script>
-
 <script>
 	$(function () {
 		$('#modal-table1').DataTable({

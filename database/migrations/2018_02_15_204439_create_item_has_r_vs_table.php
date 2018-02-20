@@ -20,7 +20,6 @@ class CreateItemHasRVsTable extends Migration
             $table->integer('item_id')->unsigned();
 
             $table->string('cantidad');
-            $table->integer('item');
             $table->string('nota');
 
             $table->timestamps();

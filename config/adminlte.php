@@ -110,25 +110,30 @@ return [
     'menu' => [
         'RESÚMEN GENERAL',
         [
-            'text' => 'Resumen',
-            'url'  => 'admin/resumen',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Alertas',
-            'url'         => 'admin/alertas',
+            'text'        => 'Inicio',
+            'url'         => 'home',
             'icon'        => 'bell-o',
-            'label'       => 4,
             'label_color' => 'success',
+            'can'         => 
+            [
+                'compras',
+                'produccion',
+            ],
         ],
         [
-            'text'        => 'Graficos',
-            'url'         => 'admin/graficos',
+            'text'        => 'Reportes estadisticos',
+            'url'         => 'reportes',
             'icon'        => 'bar-chart',
             'label_color' => 'success',
         ],
         [
-            'text'        => 'Reportes',
+            'text'        => 'Calendario',
+            'url'         => 'calendario',
+            'icon'        => 'calendar-check-o',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Listados de Reportes',
             'icon'        => 'file',
             'label_color' => 'success',
             'submenu' => [
@@ -168,6 +173,7 @@ return [
                 ],
             ],
         ],
+        'REGISTROS',
         [
             'text'        => 'Datos',
             'icon'        => 'file',
@@ -209,42 +215,38 @@ return [
                     'icon'        => 'file-text',
                     'label_color' => 'success',
                 ],
+                [
+                    'text'        => 'Items',
+                    'url'         => 'items',
+                    'icon'        => 'file-text',
+                    'label_color' => 'success',
+                ],
             ],
         ],
 
         'ESTADÍSTICAS',
         [
-            'text' => 'Estadisticas',
-            'url'  => 'admin/estadisticas',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Estadisticas Generales',
-            'url'         => 'admin/generales',
+            'text'        => 'Inventarios',
+            'url'         => 'estadisticas/generales',
             'icon'        => 'pie-chart',
             'label_color' => 'success',
         ],
         'PERFÍL',
         [
-            'text' => 'Perfíl',
-            'url'  => 'admin/estadisticas',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text' => 'Editar Perfíl',
-            'url'  => 'admin/perfil/editar',
+            'url'  => 'perfil/editar',
             'icon' => 'cog',
         ],
         'SUPER USUARIO',
         [
             'text' => 'Ver Registros de archivos',
-            'url'  => 'admin/ver',
+            'url'  => 'registros',
             'icon_color' => 'red',
             'icon' => 'list',
         ],
         [
             'text'       => 'Gestión de usuarios',
-            'url'  => 'admin/supersu',
+            'url'  => 'users',
             'icon_color' => 'red',
             'icon' => 'users',
         ],

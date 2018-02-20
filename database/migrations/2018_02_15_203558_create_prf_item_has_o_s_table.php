@@ -20,7 +20,6 @@ class CreatePrfItemHasOSTable extends Migration
             $table->integer('item_id')->unsigned();
 
             $table->string('cantidad');
-            $table->integer('existencia');
             $table->string('estado');
 
             $table->timestamps();

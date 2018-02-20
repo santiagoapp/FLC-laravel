@@ -14,7 +14,7 @@ class ItemHasOTController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

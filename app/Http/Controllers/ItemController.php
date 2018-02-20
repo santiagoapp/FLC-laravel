@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\ItemHasOT;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -14,7 +15,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $result = Item::paginate(15);
+        return view('datos.items',compact('result'));
     }
 
     /**
@@ -46,7 +48,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+
     }
 
     /**
