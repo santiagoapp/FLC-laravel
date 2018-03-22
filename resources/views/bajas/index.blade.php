@@ -18,34 +18,36 @@
 		<a class="btn btn-flat btn-primary agregar"><i class="fa fa-plus"></i> Nuevo Registro</a>
 	</div>
 	<div class="box-body">
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Equipo</th>
-					<th>Motivo</th>
-					<th>Autorizó</th>
-					<th>Cargo</th>
-					<th>Accion</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($result as $baja)
-				<tr id="tr-{{$baja->id}}" class="filas">
-					<td>{{$baja->id}}</td>
-					<td value ="{{$baja->equipo_id}}">{{$baja->equipo->maquina_id}}</td>
-					<td>{{$baja->motivo}}</td>
-					<td>{{$baja->autoriza}}</td>
-					<td>{{$baja->cargo}}</td>
-					<td>
-						<a id="pdf-{{$baja->id}}" class="btn btn-flat btn-info btn-block" role="button" name="pdf-{{$baja->id}}" href="{{ route('pdf') }}"><span class="fa fa-file-pdf-o"></span> PDF</a>
-						<a id="editar-{{$baja->id}}" class="btn btn-flat btn-info btn-block editar" role="button" name="editar-{{$baja->id}}" data-toggle="modal">Editar</a>
-						<a id="eliminar-{{$baja->id}}" class="btn btn-flat btn-warning btn-block eliminar" role="button" name="eliminar-{{$baja->id}}" data-toggle="modal">Eliminar</a>
-					</td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
+		<div class="box-body table-responsive no-padding">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Equipo</th>
+						<th>Motivo</th>
+						<th>Autorizó</th>
+						<th>Cargo</th>
+						<th>Accion</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($result as $baja)
+					<tr id="tr-{{$baja->id}}" class="filas">
+						<td>{{$baja->id}}</td>
+						<td value ="{{$baja->equipo_id}}">{{$baja->equipo->maquina_id}}</td>
+						<td>{{$baja->motivo}}</td>
+						<td>{{$baja->autoriza}}</td>
+						<td>{{$baja->cargo}}</td>
+						<td>
+							<a id="pdf-{{$baja->id}}" class="btn btn-flat btn-info btn-block" role="button" name="pdf-{{$baja->id}}" href="{{ action('BajaController@show',$baja->id) }}"><span class="fa fa-file-pdf-o"></span> PDF</a>
+							<a id="editar-{{$baja->id}}" class="btn btn-flat btn-info btn-block editar" role="button" name="editar-{{$baja->id}}" data-toggle="modal">Editar</a>
+							<a id="eliminar-{{$baja->id}}" class="btn btn-flat btn-warning btn-block eliminar" role="button" name="eliminar-{{$baja->id}}" data-toggle="modal">Eliminar</a>
+						</td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
 
 	</div>
 </div>
@@ -128,7 +130,7 @@
 				} else {
 					swal("Será en otra ocasión :)");
 				}
-			});
+			}); 
 		});
 
 		function eliminarBaja(id_boton){

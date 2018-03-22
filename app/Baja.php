@@ -8,7 +8,7 @@ class Baja extends Model
 {
 	public function equipo()
 	{
-		return $this->belongsTo('App\Equipo');
+		return $this->belongsTo('App\Equipo','equipo_id','id');
 	}
 
 }

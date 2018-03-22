@@ -7,20 +7,32 @@ use App\Equipo;
 use App\Cargo;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+// use PDF;
 
 class BajaController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         $result = Baja::all();
         $equipos = Equipo::all();
         $cargos = Cargo::all();
         return view('bajas.index',compact('result','equipos','cargos'));
+    }
+    public function show(Baja $baja)
+    {
+        $result = Baja::findOrFail($baja);
+        $baja = $result[0];
+        $equipo = $result[0]->equipo;
+        $operario = $result[0]->equipo->operario;
+        $cargo = $result[0]->equipo->operario->cargo;
+        // dd($baja->autoriza);
+        $pdf = PDF::loadView('prints.acta-de-bajas',compact('baja','equipo','operario','cargo'));
+        return $pdf->download('asd.pdf');
     }
 
     public function store(Request $request)
@@ -56,14 +68,6 @@ class BajaController extends Controller
 
         return response()->json($baja);
     }
-    public function show(Baja $baja)
-    {
 
-    }
-    public function generarPDF()
 
-    {
-        $pdf = PDF::loadView('<h1>Test</h1>');
-        return $pdf->download('asd.pdf');
-    }
 }

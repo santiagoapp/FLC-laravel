@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-	return view('welcome');
+Route::get('/asd', function () {
+	return view('prints.acta-de-bajas');
 });
 
 Auth::routes();
@@ -60,7 +60,9 @@ Route::group( ['middleware' => ['auth']], function() {
 	Route::post('correctivos/actualizar', 'CorrectivoController@actualizar');
 	Route::post('bajas/eliminar', 'BajaController@eliminar');
 	Route::post('bajas/actualizar', 'BajaController@actualizar');
-	Route::get('bajas/pdf', 'BajaController@generarPDF')->name('pdf');
+
+	// Route::get('bajas/pdf', 'BajaController@generarPDF');
+
 	Route::get('documentos/pdf/acta-de-baja', 'PDFController@actaBaja');
 	// Route::get('bajas/pdf',array('as'=>'bajas/pdf','uses'=>'BajaController@generarPDF'));
 	Route::post('users/add','UserController@agregarPermiso');

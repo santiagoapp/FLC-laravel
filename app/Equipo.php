@@ -15,7 +15,7 @@ class Equipo extends Model
 	}
 	public function operario()
 	{
-		return $this->belongsTo('App\Operario');
+		return $this->belongsTo('App\Operario','operario_id','id');
 	}
 	public function zona()
 	{
