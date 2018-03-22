@@ -17,6 +17,7 @@ class CreateOTsTable extends Migration
             $table->increments('id');
 
             $table->dateTime('fecha_impresion');
+            $table->dateTime('fecha_recibido_produccion')->nullable();
             $table->string('cliente');
             $table->string('vendedor');
             $table->string('ciudad');

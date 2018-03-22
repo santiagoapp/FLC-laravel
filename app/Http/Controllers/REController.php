@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\RE;
+use App\Item;
+use App\ItemHasRE;
 use Illuminate\Http\Request;
 
 class REController extends Controller
@@ -15,7 +17,9 @@ class REController extends Controller
      */
     public function index()
     {
-        return view('datos.RE');
+        $result = RE::paginate(15);
+        return view('datos.RE',compact('result'));
+
     }
 
     /**
@@ -82,5 +86,23 @@ class REController extends Controller
     public function destroy(RE $rE)
     {
         //
+    }
+    public function mostrarItems(Request $request)
+    {
+        $arr = array();
+        
+        $result = ItemHasRE::where('re_id',$request->id)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['producto'][] = $item->descripcion;
+            $arr['nota'][] = $res->nota;
+        }
+
+        return response()->json($arr);
     }
 }

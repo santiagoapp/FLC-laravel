@@ -114,11 +114,14 @@ return [
             'url'         => 'home',
             'icon'        => 'bell-o',
             'label_color' => 'success',
-            'can'         => 
-            [
-                'compras',
-                'produccion',
-            ],
+            'can'         => 'compras',
+            'can'         => 'produccion',
+        ],
+        [
+            'text'        => 'Gestión de transporte',
+            'url'         => 'reportes',
+            'icon'        => 'bar-chart',
+            'label_color' => 'success',
         ],
         [
             'text'        => 'Reportes estadisticos',
@@ -180,6 +183,12 @@ return [
             'label_color' => 'success',
             'submenu' => [
                 [
+                    'text'        => 'Agregar Nuevo',
+                    'url'         => 'agregar',
+                    'icon'        => 'file-text',
+                    'label_color' => 'success',
+                ],
+                [
                     'text'        => 'Ordenes de trabajo',
                     'url'         => 'OT',
                     'icon'        => 'file-text',
@@ -222,6 +231,65 @@ return [
                     'label_color' => 'success',
                 ],
             ],
+        ],
+        'MANTENIMIENTO',
+        [
+            'text'        => 'Gestión de Equipos',
+            'url'         => 'equipos',
+            'icon'        => 'file',
+        ],
+        [
+            'text'        => 'Clasificacion de Equipos',
+            'url'         => 'clasificacions',
+            'icon'        => 'file',
+        ],
+        [
+            'text'        => 'Checklist',
+            'icon'        => 'file',
+            'submenu'     => [
+                [
+                    'text'        => 'Preguntas',
+                    'url'         => 'preguntas',
+                    'icon'        => 'file',
+                ],
+                [
+                    'text'        => 'Formulario MTO Preventivo',
+                    'url'         => 'preventivos',
+                    'icon'        => 'file',
+                ],
+                [
+                    'text'        => 'Formulario MTO correctivo',
+                    'url'         => 'correctivos',
+                    'icon'        => 'file',
+                ],
+                [
+                    'text'        => 'Generar Acta de Baja',
+                    'url'         => 'bajas',
+                    'icon'        => 'file',
+                ],
+            ],
+        ],
+        'RECURSOS HUMANOS',
+        [
+            'text'        => 'Personal de planta',
+            'url'         => 'recursoshumanos',
+            'icon'        => 'pie-chart'
+        ],
+        [
+            'text'        => 'Cargos',
+            'url'         => 'cargos',
+            'icon'        => 'pie-chart'
+        ],
+        'INSTALACIONES',
+        [
+            'text'        => 'Instalaciones',
+            'url'         => 'instalaciones',
+            'icon'        => 'pie-chart',
+        ],
+        [
+            'text'        => 'Zonas',
+            'url'         => 'zonas',
+            'icon'        => 'pie-chart',
         ],
 
         'ESTADÍSTICAS',

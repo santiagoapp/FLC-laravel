@@ -35,7 +35,7 @@
 							</form>
 							<!-- /.search form -->
 						</div>
-						<div class="col-md-5 col-md-offset-1">
+						<div class="col-md-6">
 							{{$result->links()}}
 						</div>
 					</div>
@@ -59,12 +59,18 @@
 							<td>{{ $OSReg->rq_id}}</td>
 							<td>{{ $OSReg->proveedor }}</td>
 							<td>{{ $OSReg->pago }}</td>
-							<td>{{ $OSReg->notas }}</td>
+							<td>{{ $OSReg->nota }}</td>
 							<td>{{ $OSReg->fecha }}</td>
 							<td>
-								<a id="boton-{{ $OSReg->id }}" class="btn btn-flat btn-block btn-info boton" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items P. Final</a>
-								<a id="boton-{{ $OSReg->id }}" class="btn btn-flat btn-block btn-info boton" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items Material</a>
-								<a id="boton-{{ $OSReg->id }}" class="btn btn-flat btn-block btn-info boton" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items Servicio</a>
+								@if($OSReg->find($OSReg->id)->prfItemHasOS)
+								<a id="boton-{{ $OSReg->id }}-1" class="btn btn-flat btn-block btn-info boton1" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items P. Final</a>
+								@endif
+								@if($OSReg->find($OSReg->id)->matItemHasOS)
+								<a id="boton-{{ $OSReg->id }}-2" class="btn btn-flat btn-block btn-info boton2" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items Material</a>
+								@endif
+								@if($OSReg->find($OSReg->id)->maqItemHasOS)
+								<a id="boton-{{ $OSReg->id }}-3" class="btn btn-flat btn-block btn-info boton3" role="button" name="{{ $OSReg->id }}" data-toggle="modal">Items Servicio</a>
+								@endif
 							</td>
 						</tr>
 						@endforeach
@@ -97,7 +103,7 @@
 							</form>
 							<!-- /.search form -->
 						</div>
-						<div class="col-md-5 col-md-offset-1">
+						<div class="col-md-6">
 							{{$result->links()}}
 						</div>
 					</div>
@@ -109,72 +115,18 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Items Producto terminado</h4>
+				<h4 class="modal-title" id="modal-title1"> </h4>
 			</div>
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-5">
-							<table id="modal-table1" class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Código</th>
-										<th>Descripción</th>
-										<th>Cantidad</th>
-										<th>Existencia</th>
-										<th>Estado</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>ID</td>
-										<td>Fecha de Impresion</td>
-										<td>Cliente</td>
-										<td>Vendedor</td>
-										<td>Ciudad</td>
-										<td>Observaciones</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<th>ID</th>
-										<th>Código</th>
-										<th>Descripción</th>
-										<th>Cantidad</th>
-										<th>Existencia</th>
-										<th>Estado</th>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				@include('partials.botones_modal')
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title2" id="myModalLabel">Items Material</h4>
-			</div>
-			<div class="modal-body">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-6">
-							<table id="modal-table1" class="table table-bordered table-hover">
+						<div class="col-xs-7 col-md-offset-1">
+							<table id="table-modal1" class="table table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>ID</th>
@@ -184,14 +136,8 @@
 										<th>Estado</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>ID</td>
-										<td>Fecha de Impresion</td>
-										<td>Cliente</td>
-										<td>Vendedor</td>
-										<td>Ciudad</td>
-									</tr>
+								<tbody id="tabla-body1">
+									
 								</tbody>
 								<tfoot>
 									<tr>
@@ -214,35 +160,29 @@
 	</div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Items Maquinado o servicio</h4>
+				<h4 class="modal-title" id="modal-title2"> </h4>
 			</div>
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-6">
-							<table id="modal-table3" class="table table-bordered table-hover">
+						<div class="col-xs-7 col-md-offset-1">
+							<table id="table-modal2" class="table table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>ID</th>
 										<th>Código</th>
 										<th>Descripción</th>
 										<th>Cantidad</th>
-										<th>Fecha</th>
+										<th>Estado</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>ID</td>
-										<td>Fecha de Impresion</td>
-										<td>Cliente</td>
-										<td>Vendedor</td>
-										<td>Ciudad</td>
-									</tr>
+								<tbody id="tabla-body2">
+									
 								</tbody>
 								<tfoot>
 									<tr>
@@ -250,6 +190,53 @@
 										<th>Código</th>
 										<th>Descripción</th>
 										<th>Cantidad</th>
+										<th>Estado</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				@include('partials.botones_modal')
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modal-title3"> </h4>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-7 col-md-offset-1">
+							<table id="table-modal3" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Código</th>
+										<th>Descripción</th>
+										<th>Cantidad</th>
+										<th>Existencia</th>
+										<th>Fecha</th>
+									</tr>
+								</thead>
+								<tbody id="tabla-body3">
+									
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>ID</th>
+										<th>Código</th>
+										<th>Descripción</th>
+										<th>Cantidad</th>
+										<th>Existencia</th>
 										<th>Fecha</th>
 									</tr>
 								</tfoot>
@@ -260,7 +247,6 @@
 			</div>
 			<div class="modal-footer">
 				@include('partials.botones_modal')
-
 			</div>
 		</div>
 	</div>
@@ -270,47 +256,88 @@
 @section('js')
 <script>
 	$(function () {
-		$('#modal-table1').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
-			'paging'      : true,
-			'lengthChange': false,
-			'searching'   : false,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : true
-		})
-	})
-</script>
-<script>
-	$(function () {
-		$('#modal-table2').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
-			'paging'      : true,
-			'lengthChange': false,
-			'searching'   : false,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : true
-		})
-	})
-</script>
-<script>
-	$(function () {
-		$('#modal-table3').DataTable({
-			buttons: [
-			'copy', 'excel', 'pdf'
-			],
-			'paging'      : true,
-			'lengthChange': false,
-			'searching'   : false,
-			'ordering'    : true,
-			'info'        : true,
-			'autoWidth'   : true
-		})
-	})
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+		$('.boton1').click(function () {
+			var id_boton = $(this).prop("name");
+			$.ajax({
+			    url : '{{ action('OSController@mostrarItemsPrf')}}', // la URL para la petición	    
+			    data : { id : id_boton }, // la información a enviar (también es posible utilizar una cadena de datos)
+			    type : 'POST', // especifica si será una petición POST o GET
+			    // dataType : 'json', // el tipo de información que se espera de respuesta
+			    success : function(respuesta) {
+			    	document.getElementById("modal-title1").innerHTML = 'Items PFT de OS' + id_boton;
+			    	document.getElementById("tabla-body1").innerHTML = '';
+			    	for (var i = 0; i < respuesta.id.length; i++) {
+			    		$("#table-modal1 > #tabla-body1").prepend('<tr><td>' + respuesta.id[i] + '</td><td>' + respuesta.codigo[i] + '</td><td>' + respuesta.descripcion[i] + '</td><td>' + respuesta.cantidad[i] + '</td><td>' + respuesta.estado[i] + '</td></tr>');
+			    	}
+
+			    	// $('#table-modal').DataTable().ajax.reload();
+			    	$('#modal1').modal('show');
+			    	console.log(respuesta)
+			    },
+			    error : function(xhr, status) {
+			    	alert('No se pudo realizar la petición');
+			    	console.log(xhr);
+			    },
+			});
+		});
+
+
+		$('.boton2').click(function () {
+			var id_boton = $(this).prop("name");
+			$.ajax({
+			    url : '{{ action('OSController@mostrarItemsMat')}}', // la URL para la petición	    
+			    data : { id : id_boton }, // la información a enviar (también es posible utilizar una cadena de datos)
+			    type : 'POST', // especifica si será una petición POST o GET
+			    // dataType : 'json', // el tipo de información que se espera de respuesta
+			    success : function(respuesta) {
+			    	document.getElementById("modal-title2").innerHTML = 'Items MAT de OS' + id_boton;
+			    	document.getElementById("tabla-body2").innerHTML = '';
+			    	for (var i = 0; i < respuesta.id.length; i++) {
+			    		$("#table-modal2 > #tabla-body2").prepend('<tr><td>' + respuesta.id[i] + '</td><td>' + respuesta.codigo[i] + '</td><td>' + respuesta.descripcion[i] + '</td><td>' + respuesta.cantidad[i] + '</td><td>' + respuesta.estado[i] + '</td></tr>');
+			    	}
+
+			    	// $('#table-modal').DataTable().ajax.reload();
+			    	$('#modal2').modal('show');
+			    	console.log(respuesta)
+			    },
+			    error : function(xhr, status) {
+			    	alert('No se pudo realizar la petición');
+			    	console.log(xhr);
+			    },
+			});
+		});
+
+
+		$('.boton3').click(function () {
+			var id_boton = $(this).prop("name");
+			$.ajax({
+			    url : '{{ action('OSController@mostrarItemsMaq')}}', // la URL para la petición	    
+			    data : { id : id_boton }, // la información a enviar (también es posible utilizar una cadena de datos)
+			    type : 'POST', // especifica si será una petición POST o GET
+			    // dataType : 'json', // el tipo de información que se espera de respuesta
+			    success : function(respuesta) {
+			    	document.getElementById("modal-title3").innerHTML = 'Items MAQ de OS' + id_boton;
+			    	document.getElementById("tabla-body3").innerHTML = '';
+			    	for (var i = 0; i < respuesta.id.length; i++) {
+			    		$("#table-modal3 > #tabla-body3").prepend('<tr><td>' + respuesta.id[i] + '</td><td>' + respuesta.codigo[i] + '</td><td>' + respuesta.descripcion[i] + '</td><td>' + respuesta.cantidad[i] + '</td><td>' + respuesta.existencia[i] + '</td><td>' + respuesta.fecha[i] + '</td></tr>');
+			    	}
+
+			    	// $('#table-modal').DataTable().ajax.reload();
+			    	$('#modal3').modal('show');
+			    	console.log(respuesta)
+			    },
+			    error : function(xhr, status) {
+			    	alert('No se pudo realizar la petición');
+			    	console.log(xhr);
+			    },
+			});
+		});
+	});
 </script>
 @stop

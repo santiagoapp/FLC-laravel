@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\OT;
 use App\ItemHasOT;
 use App\Item;
+use App\Prueba;
 use Illuminate\Http\Request;
 
 class OTController extends Controller
@@ -50,26 +51,26 @@ class OTController extends Controller
      */
     public function show(OT $oT)
     {
-        $arr = array();
+        // $arr = array();
 
-        $url = url()->current();
-        $url_array = explode('/', $url);
-        $orden = $url_array[count($url_array)-1];
-        
-        $result = ItemHasOT::where('ot_id',$orden)->get();
+        // $url = url()->current();
+        // $url_array = explode('/', $url);
+        // $orden = $url_array[count($url_array)-1];
 
-        foreach ($result as $res) {
-            $item = Item::find($res->item_id);
-            
-            $arr['id'][] = $item->id;
-            $arr['codigo'][] = $item->codigo;
-            $arr['descripcion'][] = $item->descripcion;
-            $arr['cantidad'][] = $res->cantidad;
-            $arr['fecha_entrega'][] = $res->fecha_entrega;
-            $arr['existencias'][] = $item->existencias;
-        }
+        // $result = ItemHasOT::where('ot_id',$orden)->get();
 
-        return response()->json($arr);
+        // foreach ($result as $res) {
+        //     $item = Item::find($res->item_id);
+
+        //     $arr['id'][] = $item->id;
+        //     $arr['codigo'][] = $item->codigo;
+        //     $arr['descripcion'][] = $item->descripcion;
+        //     $arr['cantidad'][] = $res->cantidad;
+        //     $arr['fecha_entrega'][] = $res->fecha_entrega;
+        //     $arr['existencias'][] = $item->existencias;
+        // }
+
+        // return response()->json($arr);
     }
 
     /**
@@ -104,5 +105,24 @@ class OTController extends Controller
     public function destroy(OT $oT)
     {
         //
+    }
+    public function mostrarItems(Request $request)
+    {
+        $arr = array();
+        
+        $result = ItemHasOT::where('ot_id',$request->id)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['fecha_entrega'][] = $res->fecha_entrega;
+            $arr['existencias'][] = $item->existencias;
+        }
+
+        return response()->json($arr);
     }
 }

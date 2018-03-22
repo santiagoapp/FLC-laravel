@@ -8,8 +8,10 @@ use App\Role;
 use Illuminate\Http\Request;
 
 
+
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -108,4 +110,5 @@ class UserController extends Controller
         $response = $user->revokePermissionTo($request->permiso);
         return response()->json($response);
     }
+
 }

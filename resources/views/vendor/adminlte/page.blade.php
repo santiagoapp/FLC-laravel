@@ -128,9 +128,15 @@ href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 
         @endif
     </div>
     <!-- /.content-wrapper -->
-
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0.0
+      </div>
+      <strong>Copyright &copy; 2018 <a href="https://github.com/santiagoapp/">Santiago Pereira</a>.</strong> Todos los derechos reservados.
+  </footer>
 </div>
 <!-- ./wrapper -->
+
 @stop
 
 @section('adminlte_js')

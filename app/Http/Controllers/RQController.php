@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\RQ;
 use App\ItemHasRQ;
 use App\Item;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RQController extends Controller
@@ -110,5 +111,27 @@ class RQController extends Controller
     public function destroy(RQ $rQ)
     {
         //
+    }
+    public function mostrarItems(Request $request)
+    {
+        $arr = array();
+        
+        $result = ItemHasRQ::where('rq_id',$request->id)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['compra'][] = $res->compra;
+            $arr['servicio'][] = $res->servicio;
+            $arr['estado'][] = $res->estado;
+            $arr['existencia'][] = round($item->existencias);
+            $arr['fecha'][] = Carbon::parse($res->fecha)->format('Y-m-d');
+        }
+
+        return response()->json($arr);
     }
 }

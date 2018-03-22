@@ -17,4 +17,9 @@ class ItemHasRQ extends Model
 	{
 		return $this->hasMany('App\RQ', 'id', 'rq_id');
 	}
+	
+	public function itemsDoc()
+	{
+		return $this->morphToMany('App\ItemHasOC', 'items_doc');
+	}
 }

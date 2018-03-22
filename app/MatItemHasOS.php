@@ -17,4 +17,9 @@ class MatItemHasOS extends Model
 	{
 		return $this->hasOne('App\OS', 'id', 'os_id');
 	}
+	
+	public function itemsDoc()
+	{
+		return $this->morphToMany('App\ItemHasOC', 'items_doc');
+	}
 }

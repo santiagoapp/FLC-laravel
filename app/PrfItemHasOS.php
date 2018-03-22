@@ -17,4 +17,5 @@ class PrfItemHasOS extends Model
 	{
 		return $this->hasOne('App\OS', 'id', 'os_id');
 	}
+
 }

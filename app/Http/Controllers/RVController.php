@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\RV;
+use App\Item;
+use App\ItemHasRV;
 use Illuminate\Http\Request;
 
 class RVController extends Controller
@@ -15,7 +17,8 @@ class RVController extends Controller
      */
     public function index()
     {
-        return view('datos.RV');
+        $result = RV::paginate(15);
+        return view('datos.RV',compact('result'));
     }
 
     /**
@@ -82,5 +85,23 @@ class RVController extends Controller
     public function destroy(RV $rV)
     {
         //
+    }
+    public function mostrarItems(Request $request)
+    {
+        $arr = array();
+        
+        $result = ItemHasRV::where('rv_id',$request->id)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['nota'][] = $res->nota;
+        }
+
+        return response()->json($arr);
     }
 }

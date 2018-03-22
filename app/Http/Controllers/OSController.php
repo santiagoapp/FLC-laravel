@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\OS;
+use App\Item;
+use App\PrfItemHasOS;
+use App\MatItemHasOS;
+use App\MaqItemHasOS;
 use Illuminate\Http\Request;
 
 class OSController extends Controller
@@ -84,5 +88,60 @@ class OSController extends Controller
     public function destroy(OS $oS)
     {
         //
+    }
+    public function mostrarItemsPrf(Request $request)
+    {
+        $arr = array();
+
+        $result = PrfItemHasOS::where('os_id',$request->id)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['estado'][] = $res->estado;
+        }
+
+        return response()->json($arr);
+    }
+    public function mostrarItemsMat(Request $request)
+    {
+        $arr = array();
+
+        $result = MatItemHasOS::where('os_id',$request->id)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['estado'][] = $res->estado;
+        }
+
+        return response()->json($arr);
+    }
+    public function mostrarItemsMaq(Request $request)
+    {
+        $arr = array();
+
+        $result = MaqItemHasOS::where('os_id',$request->id)->get();
+
+        foreach ($result as $res) {
+            $item = Item::find($res->item_id);
+
+            $arr['id'][] = $item->id;
+            $arr['codigo'][] = $item->codigo;
+            $arr['descripcion'][] = $item->descripcion;
+            $arr['cantidad'][] = $res->cantidad;
+            $arr['existencia'][] = $item->existencias;
+            $arr['fecha'][] = $res->fecha;
+        }
+
+        return response()->json($arr);
     }
 }

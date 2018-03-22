@@ -60,7 +60,7 @@
 							<td>{{$rq->solicita}}</td>
 							<td>{{$rq->autoriza}}</td>
 							<td>{{$rq->find($rq->ot_id)->oT->cliente}}</td>
-							<td>{{$rq->fecha}}</td>
+							<td>{{ Carbon\Carbon::parse($rq->fecha)->format('Y-m-d') }}</td>
 							<td>
 								<a id="boton-{{ $rq->id }}" class="btn btn-flat btn-block btn-primary boton" role="button" name="{{ $rq->id }}" data-toggle="modal">Ver Items</a>
 							</td>
@@ -104,61 +104,56 @@
 		</div>
 	</div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-9">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="modal-title"></h4>
-						</div>
-						<div class="modal-body">
-							<div class="container">
-								<div class="row">
-									<div class="col-xs-6">
-										<table id="table-modal" class="table table-bordered table-hover">
-											<thead>
-												<tr>
-													<th>ID</th>
-													<th>Codigo</th>
-													<th>Descripción</th>
-													<th>Cantidad</th>
-													<th>Compra</th>
-													<th>Servicio</th>
-													<th>Estado</th>
-													<th>Existencia</th>
-													<th>Fecha</th>
-												</tr>
-											</thead>
-											<tbody id="tabla-body">
 
-											</tbody>
-											<tfoot>
-												<tr>
-													<th>ID</th>
-													<th>Codigo</th>
-													<th>Descripción</th>
-													<th>Cantidad</th>
-													<th>Compra</th>
-													<th>Servicio</th>
-													<th>Estado</th>
-													<th>Existencia</th>
-													<th>Fecha</th>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							@include('partials.botones_modal')
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modal-title"> </h4>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-8">
+							<table id="table-modal" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Codigo</th>
+										<th>Descripción</th>
+										<th>Cantidad</th>
+										<th>Compra</th>
+										<th>Servicio</th>
+										<th>Estado</th>
+										<th>Existencia</th>
+										<th>Fecha</th>
+									</tr>
+								</thead>
+								<tbody id="tabla-body">
+									
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>ID</th>
+										<th>Codigo</th>
+										<th>Descripción</th>
+										<th>Cantidad</th>
+										<th>Compra</th>
+										<th>Servicio</th>
+										<th>Estado</th>
+										<th>Existencia</th>
+										<th>Fecha</th>
+									</tr>
+								</tfoot>
+							</table>
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="modal-footer">
+				@include('partials.botones_modal')
 			</div>
 		</div>
 	</div>
@@ -171,7 +166,6 @@
 	$(function () {		
 
 		$('#table-modal').DataTable({
-			// 'lengthMenu': [[2 ,5], [2, 5]],
 			'paging'      : true,
 			'lengthChange': true,
 			'searching'   : true,
@@ -203,19 +197,30 @@
 		$('.boton').click(function () {
 			var id_boton = $(this).prop("name");
 			$.ajax({
-			    url : '{{ action('RQController@index')}}/'+ id_boton, // la URL para la petición	    
-			    // data : { id : 123 }, // la información a enviar (también es posible utilizar una cadena de datos)
-			    type : 'GET', // especifica si será una petición POST o GET
+			    url : '{{ action('RQController@mostrarItems')}}', // la URL para la petición	    
+			    data : { id : id_boton }, // la información a enviar (también es posible utilizar una cadena de datos)
+			    type : 'POST', // especifica si será una petición POST o GET
 			    // dataType : 'json', // el tipo de información que se espera de respuesta
 			    success : function(respuesta) {
 			    	document.getElementById("modal-title").innerHTML = 'Items de RQ' + id_boton;
 			    	document.getElementById("tabla-body").innerHTML = '';
 			    	for (var i = 0; i < respuesta.id.length; i++) {
-
-			    		$("#table-modal > #tabla-body").prepend('<tr><td>' + respuesta.id[i] + '</td><td>' + respuesta.codigo[i] + '</td><td>' + respuesta.descripcion[i] + '</td><td>' + respuesta.cantidad[i] + '</td><td>' + respuesta.compra[i] + '</td><td>' + respuesta.servicio[i] + '</td><td>' + respuesta.estado[i] + '</td><td>' + respuesta.existencias[i] + '</td><td>' + respuesta.fecha[i] + '</td></tr>');
+			    		if (respuesta.compra[i]) {
+			    			compra_boton = '<a class="btn btn-flat btn-block"><span class="fa fa-check"></span></a>';
+			    		}else{
+			    			compra_boton = '';
+			    		}
+			    		if (respuesta.servicio[i]) {
+			    			servicio_boton = '<a class="btn btn-flat btn-block btn-secundary"><span class="fa fa-check"></span></a>';
+			    		}else{
+			    			servicio_boton = '';
+			    		}
+			    		$("#table-modal > #tabla-body").prepend('<tr><td>' + respuesta.id[i] + '</td><td>' + respuesta.codigo[i] + '</td><td>' + respuesta.descripcion[i] + '</td><td>' + respuesta.cantidad[i] + '</td><td>' + compra_boton + '</td><td>' + servicio_boton + '</td><td>' + respuesta.estado[i] + '</td><td>' + respuesta.existencia[i] + '</td><td>' + respuesta.fecha[i] + '</td></tr>');
 			    	}
-			    	$('#table-modal').DataTable().ajax.reload();
+
+			    	// $('#table-modal').DataTable().ajax.reload();
 			    	$('#modal').modal('show');
+			    	console.log(respuesta)
 			    },
 			    error : function(xhr, status) {
 			    	alert('No se pudo realizar la petición');

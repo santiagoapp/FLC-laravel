@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\ItemHasRV;
 
 class RV extends Model
 {
@@ -10,6 +11,10 @@ class RV extends Model
 
 	public function oT()
 	{
-		return $this->belongsTo('App\OT', 'id', 'ot_id');
+		return $this->belongsTo('App\OT', 'ot_id', 'id');
+	}
+	public function items()
+	{
+		return $this->hasMany('App\ItemHasRV', 'rv_id', 'id');
 	}
 }

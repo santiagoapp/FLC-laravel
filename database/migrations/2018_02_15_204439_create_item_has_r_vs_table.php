@@ -17,7 +17,7 @@ class CreateItemHasRVsTable extends Migration
             $table->increments('id');
 
             $table->integer('rv_id')->unsigned();
-            $table->integer('item_id')->unsigned();
+            $table->integer('item_has_ot_id')->unsigned();
 
             $table->string('cantidad');
             $table->string('nota');
@@ -25,7 +25,7 @@ class CreateItemHasRVsTable extends Migration
             $table->timestamps();
 
             $table->foreign('rv_id')->references('id')->on('r_vs');
-            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('item_has_ot_id')->references('item_id')->on('item_has_o_ts');
         });
     }
 

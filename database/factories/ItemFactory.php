@@ -9,7 +9,7 @@ $factory->define(App\Item::class, function (Faker $faker) {
 		$z = $aleatorio + $z;
 	}
 	$z = $z-6;
-	$normal = $z*3+5;
+	$normal = round($z*2+10);
 	return [
 		'codigo' => 'MP' . $faker->numberBetween($min = 1000, $max = 9000),
 		'descripcion' => $faker->text($maxNbChars = 100),

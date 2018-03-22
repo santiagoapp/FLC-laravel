@@ -57,7 +57,7 @@
 						@foreach($result as $OTReg)
 						<tr>
 							<td>{{ $OTReg->id }}</td>
-							<td>{{ $OTReg->fecha_impresion }}</td>
+							<td>{{ Carbon\Carbon::parse($OTReg->fecha_impresion)->format('Y-m-d') }}</td>
 							<td>{{ $OTReg->cliente }}</td>
 							<td>{{ $OTReg->vendedor }}</td>
 							<td>{{ $OTReg->ciudad }}</td>
@@ -110,7 +110,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -119,7 +119,7 @@
 			<div class="modal-body">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-5">
+						<div class="col-xs-7 col-md-offset-1">
 							<table id="table-modal" class="table table-bordered table-hover">
 								<thead>
 									<tr>
@@ -196,17 +196,18 @@
 			var id_boton = $(this).prop("name");
 			// alert(id_boton);
 			$.ajax({
-			    url : '{{ action('OTController@index')}}/'+ id_boton, // la URL para la petición	    
-			    // data : { id : 123 }, // la información a enviar (también es posible utilizar una cadena de datos)
-			    type : 'GET', // especifica si será una petición POST o GET
+			    url : '{{ action('OTController@mostrarItems') }}', // la URL para la petición	    
+			    data : { id : id_boton }, // la información a enviar (también es posible utilizar una cadena de datos)
+			    type : 'POST', // especifica si será una petición POST o GET
 			    // dataType : 'json', // el tipo de información que se espera de respuesta
 			    success : function(respuesta) {
 			    	document.getElementById("modal-title").innerHTML = 'Items de OT' + id_boton;
-			    	document.getElementById("tabla-body").innerHTML = '';
+			    	document.getElementById("tabla-body").innerHTML = '';	
 			    	for (var i = 0; i < respuesta.id.length; i++) {
 			    		$("#table-modal > #tabla-body").prepend('<tr><td>' + respuesta.id[i] + '</td><td>' + respuesta.codigo[i] + '</td><td>' + respuesta.descripcion[i] + '</td><td>' + respuesta.cantidad[i] + '</td><td>' + respuesta.fecha_entrega[i] + '</td><td>' + respuesta.existencias[i] + '</td></tr>');
 			    	}
 			    	$('#modal').modal('show');
+			    	console.log(respuesta.id);
 			    },
 			    error : function(xhr, status) {
 			    	alert('No se pudo realizar la petición');

@@ -16,5 +16,6 @@ class MaqItemHasOS extends Model
 	public function oS()
 	{
 		return $this->hasOne('App\OS', 'id', 'os_id');
-	}
+	}	
+
 }

@@ -18,15 +18,14 @@ class CreateItemHasOCsTable extends Migration
             $table->increments('id');
 
             $table->integer('oc_id')->unsigned();
-            $table->integer('item_id')->unsigned();
 
             $table->dateTime('fecha');
             $table->string('cantidad');
+            $table->morphs('items_doc'); //la clave de todo
 
             $table->timestamps();
             
             $table->foreign('oc_id')->references('id')->on('o_cs');
-            $table->foreign('item_id')->references('id')->on('items');
 
         });
     }

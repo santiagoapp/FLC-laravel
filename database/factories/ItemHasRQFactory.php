@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(App\ItemHasRQ::class, function (Faker $faker) {
@@ -8,6 +9,6 @@ $factory->define(App\ItemHasRQ::class, function (Faker $faker) {
 		'compra' => $faker->boolean(50),
 		'servicio' => $faker->boolean(50),
 		'estado' => $faker->randomElement($array = array ('Activo','Entregado','Pendiente')),
-		'fecha' => $faker->dateTime($max = 'now', $timezone = null),
+		'fecha' => Carbon::create()->subDays(rand(1,30)),
 	];
 });

@@ -44,7 +44,7 @@ class PrfItemHasOSController extends Controller
      * @param  \App\PrfItemHasOS  $prfItemHasOS
      * @return \Illuminate\Http\Response
      */
-    public function show(PrfItemHasOS $prfItemHasOS)
+    public function show(PrfItemHasOS $PrfItemHasOS)
     {
         //
     }

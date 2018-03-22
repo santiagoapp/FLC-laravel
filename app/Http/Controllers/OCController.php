@@ -15,7 +15,8 @@ class OCController extends Controller
      */
     public function index()
     {
-        return view('datos.OC');
+        $result = OC::paginate(15);
+        return view('datos.OC',compact('result'));
     }
 
     /**

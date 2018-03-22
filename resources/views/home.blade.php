@@ -5,6 +5,7 @@
 @section('css')
 <link rel="stylesheet" href="{{asset('vendor/adminlte/vendor/fullcalendar/css/fullcalendar.min.css')}}">
 <link rel="stylesheet" href="{{asset('vendor/adminlte/vendor/fullcalendar/css/fullcalendar.print.min.css')}}">
+<link rel="stylesheet" href="{{asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 
 @stop
 
@@ -16,7 +17,7 @@
 
 <div class="box box-default color-palette-box">
 	<div class="box-header with-border">
-		<h3 class="box-title"><i class="fa fa-tag"></i> Información General</h3>
+		<h3 class="box-title"><i class="fa fa-tag"></i> Información general</h3>
 	</div>
 	<div class="box-body">
 		<div class="row">
@@ -78,13 +79,90 @@
 		</div>
 	</div>
 </div>
+
 @stop
 
 @section('js')
 
 <script src="{{asset('vendor/adminlte/vendor/fullcalendar/js/moment.js')}}"></script>
 <script src="{{asset('vendor/adminlte/vendor/fullcalendar/js/fullcalendar.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+<script>
 
+	$(function () {
+		var arr = [];
+		var n = new Date();
+		var hoy = fecha(n);
+
+		$('#datepicker1').val(hoy);
+
+		$('#datepicker1').datepicker({
+			autoclose: true
+		});
+
+		$('#datepicker2').val(hoy);
+
+		$('#datepicker2').datepicker({
+			autoclose: true
+		});
+
+		$('#departamento').select2();
+		$('#OTs').select2();
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+
+		$('#departamento').on('change', function() {
+
+			id = $("#departamento option:selected").val()
+			$.ajax({
+				type: "POST",
+				url: '{{ action('CitiesController@verCiudades')}}',
+				data : { 
+					id 		: id,
+				},
+				success: function (data) {
+					for (var i = 0; i < data.length; i++) {
+						arr[i] = data[i].name
+					}
+					$("#ciudad").empty().trigger('change')
+					$('#ciudad').select2({
+						data: arr
+					});
+					arr = [];
+				},
+				error: function (data) {
+					console.log('Error:', data);
+				}
+			});
+		});
+
+
+
+
+		function fecha(valor) {
+
+			mes = valor.getMonth()
+			dia = valor.getDate()
+			año = valor.getFullYear()
+
+			if (mes<10) {
+				mes = mes + 1
+				mes = "0" + mes
+			} 
+			if(dia<10){
+				dia = "0"
+			}
+
+			return mes + "/" + dia + "/" + año
+		}
+
+	});
+</script>
 
 
 @stop
