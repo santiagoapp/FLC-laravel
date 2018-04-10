@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\RQ;
 use App\OT;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class CalendarioController extends Controller
+class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,23 +15,20 @@ class CalendarioController extends Controller
      */
     public function index()
     {
-        // $arr = array();
-        // $result = RQ::whereDate('fecha', '>', date('2017-1-1'));
-        // $result = RQ::whereDate('fecha_generacion', '>' ,'2016-12-31')->get();
-        // $result = OT::all();
-        $result = OT::whereDate('OT.FECHA','>=','2018-1-1')->paginate(10);
-        // var_dump($result);
-        // foreach ($result as $res) {
+        // $res = New Res;
+        $result = OT::where('OT.ID','<','73445')->orderBy('OT.ID', 'DESC')->
+        paginate(10);
+        // $result = DB::connection('sqlsrv')->
+        // table('OT')->
+        // join('mv_OT', 'OT.ID', '=', 'mv_OT.ID')->
+        // orderBy('OT.ID', 'DESC')->
+        // paginate(15);
 
-        //     $arr['id'][] = $res->id;
-        //     $arr['start_date'][] = $res->fecha_entrega;
-        //     $arr['end_date'][] = $res->fecha_entrega;
-        //     $arr['text'][] = $res->autoriza;
-        // }
-
-        // $result = response()->json($arr);
-        // $result = $arr;
-        return view('calendario',compact('result'));
+        foreach ($result as $value) {
+            $value->items;
+        }
+        // dd($result);
+        return $result;
     }
 
     /**
@@ -58,10 +55,10 @@ class CalendarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Test $test)
     {
         //
     }
@@ -69,10 +66,10 @@ class CalendarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Test $test)
     {
         //
     }
@@ -81,10 +78,10 @@ class CalendarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Test $test)
     {
         //
     }
@@ -92,10 +89,10 @@ class CalendarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Test $test)
     {
         //
     }

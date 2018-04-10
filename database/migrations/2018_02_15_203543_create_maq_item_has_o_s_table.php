@@ -20,9 +20,9 @@ class CreateMaqItemHasOSTable extends Migration
             $table->integer('item_id')->unsigned();
 
             $table->string('cantidad');
-            $table->dateTime('fecha');
-
-            $table->timestamps();
+            $table->dateTimeTz('fecha');
+            
+            $table->timestampsTz();
             
             $table->foreign('os_id')->references('id')->on('o_s');
             $table->foreign('item_id')->references('id')->on('items');

@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class OT extends Model
 {
-	protected $table = 'o_ts';
-
-	public function rV()
-	{
-		return $this->hasMany('App\RV', 'ot_id', 'id');
-	}
+	protected $connection = 'sqlsrv';
+	protected $table = 'OT';
 
 	public function items()
 	{
-		return $this->hasMany('App\ItemHasOT', 'item_id', 'id');
+		return $this->hasMany('App\MV_OT', 'ID', 'ID');
 	}
+
+	// public function items()
+	// {
+	// 	return $this->hasMany('App\ItemHasOT', 'item_id', 'id');
+	// }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Baja;
 use App\Equipo;
-use App\Cargo;
+use App\Operario;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 // use PDF;
@@ -20,18 +20,16 @@ class BajaController extends Controller
     {
         $result = Baja::all();
         $equipos = Equipo::all();
-        $cargos = Cargo::all();
-        return view('bajas.index',compact('result','equipos','cargos'));
+        $operarios = Operario::all();
+        return view('bajas.index',compact('result','equipos','operarios'));
     }
     public function show(Baja $baja)
     {
         $result = Baja::findOrFail($baja);
         $baja = $result[0];
-        $equipo = $result[0]->equipo;
-        $operario = $result[0]->equipo->operario;
-        $cargo = $result[0]->equipo->operario->cargo;
+        
         // dd($baja->autoriza);
-        $pdf = PDF::loadView('prints.acta-de-bajas',compact('baja','equipo','operario','cargo'));
+        $pdf = PDF::loadView('prints.acta-de-bajas',compact('baja'));
         return $pdf->download('asd.pdf');
     }
 
@@ -40,11 +38,11 @@ class BajaController extends Controller
         $baja = new Baja;
         $baja->equipo_id = $request->equipo;
         $baja->motivo = $request->motivo;
-        $baja->autoriza = $request->autoriza;
-        $baja->cargo = $request->cargo;
+        $baja->autoriza_id = $request->autoriza;
 
         $baja->save();
         $baja->equipo;
+        $baja->autoriza;
         return response()->json($baja);
     }
 
@@ -53,11 +51,11 @@ class BajaController extends Controller
         $baja = Baja::find($request->hidden);
         $baja->equipo_id = $request->equipo;
         $baja->motivo = $request->motivo;
-        $baja->autoriza = $request->autoriza;
-        $baja->cargo = $request->cargo;
+        $baja->autoriza_id = $request->autoriza;
 
         $baja->save();
         $baja->equipo;
+        $baja->autoriza;
         return response()->json($baja);
     }
 

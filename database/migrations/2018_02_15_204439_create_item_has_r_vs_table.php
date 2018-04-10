@@ -22,7 +22,7 @@ class CreateItemHasRVsTable extends Migration
             $table->string('cantidad');
             $table->string('nota');
 
-            $table->timestamps();
+            $table->timestampsTz();
 
             $table->foreign('rv_id')->references('id')->on('r_vs');
             $table->foreign('item_has_ot_id')->references('item_id')->on('item_has_o_ts');

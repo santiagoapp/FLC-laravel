@@ -20,8 +20,8 @@ class CreateOSTable extends Migration
             $table->string('proveedor');
             $table->string('pago');
             $table->string('nota');
-            $table->dateTime('fecha');
-            $table->timestamps();
+            $table->dateTimeTz('fecha');
+            $table->timestampsTz();
 
             $table->foreign('rq_id')->references('id')->on('r_qs');
         });

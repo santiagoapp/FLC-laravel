@@ -21,23 +21,9 @@
         overflow: hidden;
     }
 </style>
-
 <script type="text/javascript" charset="utf-8">
 
 
-    var asd = @json($result);
-    var datos = '[';
-    for (var i = 0; i < asd.length; i++) {
-
-        if (i == asd.length-1) {
-            datos += '{"text":"'+ asd[i].solicita +'","start_date":"'+ asd[i].fecha +'", "end_date":"'+ asd[i].fecha +'"}]';
-        }else{
-            datos += '{"text":"'+ asd[i].solicita +'","start_date":"'+ asd[i].fecha +'", "end_date":"'+ asd[i].fecha +'"},';
-        }
-    }
-
-    var obj = JSON.parse(datos);
-    console.log(obj);
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
@@ -115,4 +101,5 @@
         <div class="dhx_cal_data">
         </div>
     </div>
+</div>
 </body>

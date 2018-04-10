@@ -10,5 +10,9 @@ class Baja extends Model
 	{
 		return $this->belongsTo('App\Equipo','equipo_id','id');
 	}
+	public function autoriza()
+	{
+		return $this->belongsTo('App\Operario','autoriza_id','id');
+	}
 
 }

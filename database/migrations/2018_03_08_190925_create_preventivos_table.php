@@ -17,7 +17,7 @@ class CreatePreventivosTable extends Migration
             $table->increments('id');
 
             $table->integer('equipo_id')->unsigned();
-            $table->date('fecha_mantenimiento');
+            $table->dateTimeTz('fecha_mantenimiento');
 
             $table->foreign('equipo_id')->references('id')->on('equipos');
 

@@ -19,8 +19,8 @@ class CreateREsTable extends Migration
 
             $table->integer('ot_id')->unsigned();
             $table->string('proveedor');
-            $table->dateTime('fecha');
-            $table->timestamps();
+            $table->dateTimeTz('fecha');
+            $table->timestampsTz();
 
             $table->foreign('ot_id')->references('id')->on('o_ts');
         });

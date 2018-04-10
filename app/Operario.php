@@ -16,4 +16,8 @@ class Operario extends Model
 	{
 		return $this->hasMany('App\Equipo');
 	}
+	public function bajas()
+	{
+		return $this->hasMany('App\Baja');
+	}
 }

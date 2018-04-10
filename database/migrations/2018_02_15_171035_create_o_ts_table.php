@@ -16,15 +16,14 @@ class CreateOTsTable extends Migration
         Schema::create('o_ts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->dateTime('fecha_impresion');
-            $table->dateTime('fecha_recibido_produccion')->nullable();
+            $table->dateTimeTz('fecha_impresion');
+            $table->dateTimeTz('fecha_recibido_produccion')->nullable();
             $table->string('cliente');
             $table->string('vendedor');
             $table->string('ciudad');
             $table->string('observacion');
             $table->string('transporte');
-
-            $table->timestamps();
+            $table->timestampsTz();
             
         });
     }

@@ -14,7 +14,7 @@ class PreventivoController extends Controller
      */
     public function index()
     {
-        //
+        return view('preventivo.index');
     }
 
     /**

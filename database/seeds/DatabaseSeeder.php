@@ -210,7 +210,7 @@ public function run()
 
 private function createUser($usuarios)
 {
-    for ($i=1; $i < $usuarios; $i++) { 
+    for ($i=0; $i < $usuarios; $i++) { 
         $user = factory(User::class)->create();
         $this->command->info('Detalles de la cuenta:');
         $this->command->warn($user->email);

@@ -23,7 +23,7 @@ class CreateMatItemHasOSTable extends Migration
             $table->string('cantidad');
             $table->string('estado');
 
-            $table->timestamps();
+            $table->timestampsTz();
             
             $table->foreign('os_id')->references('id')->on('o_s');
             $table->foreign('item_id')->references('id')->on('items');

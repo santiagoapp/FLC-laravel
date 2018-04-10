@@ -22,8 +22,8 @@ class CreateCorrectivosTable extends Migration
             $table->string('falla');
             $table->string('causa')->nullable();
             $table->string('observacion')->nullable();
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->dateTimeTz('fecha_inicio');
+            $table->dateTimeTz('fecha_fin');
 
             $table->foreign('operario_id')->references('id')->on('operarios');
             $table->foreign('equipo_id')->references('id')->on('equipos');

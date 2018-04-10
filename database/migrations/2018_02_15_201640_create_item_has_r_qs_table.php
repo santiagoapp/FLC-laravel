@@ -24,9 +24,9 @@ class CreateItemHasRQsTable extends Migration
             $table->boolean('compra');
             $table->boolean('servicio');
             $table->string('estado');
-            $table->dateTime('fecha');
+            $table->dateTimeTz('fecha');
 
-            $table->timestamps();
+            $table->timestampsTz();
 
             $table->foreign('rq_id')->references('id')->on('r_qs');
             $table->foreign('item_id')->references('id')->on('items');

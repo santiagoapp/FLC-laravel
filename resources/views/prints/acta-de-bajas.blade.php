@@ -43,11 +43,13 @@
 	}
 </style>
 <title>Flexilatina de Colombia</title>
+<!-- {{setlocale(LC_TIME, 'Spanish')}} -->
+{{Carbon\Carbon::setUtf8(true)}}
 </head>
 <body>
 	<h1 class="arial negrita center">ACTA PARA LA BAJA DE ACTIVOS No.________</h1>
 	<h1 class="arial negrita center" style="margin-bottom: 40px;">AUTORIZACION</h1>
-	<p class="justify arial">En las instalaciones de la compañía <span class="negrita">Flexilatina de Colombia Ltda</span>, siendo las [hora] horas del día [dia] de [mes] de [año], se reúnen:</p>
+	<p class="justify arial">En las instalaciones de la compañía <span class="negrita">Flexilatina de Colombia Ltda</span>, siendo las <span class="negrita">{{ Carbon\Carbon::parse( $baja->created_at )->hour }}:{{ Carbon\Carbon::parse( $baja->created_at )->minute }}</span> del día <span class="negrita">{{ Carbon\Carbon::parse( $baja->created_at )->formatLocalized('%A %d %B %Y') }}</span>, se reúnen:</p>
 	<p class="justify arial">Quien solicita la Baja del Activo Fijo:</p>
 
 	<table class="table">
@@ -60,9 +62,9 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="arial justify">{{ $operario->nombre}} {{ $operario->apellido}}</td>
+				<td class="arial">{{ $baja->equipo->operario->nombre}} {{ $baja->equipo->operario->apellido}}</td>
 				<td class="arial justify"></td>
-				<td class="arial justify">{{ $cargo->nombre}}</td>
+				<td class="arial">{{ $baja->equipo->operario->cargo->nombre}}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -72,16 +74,16 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th class="arial justify col">NOMBRE RESPONSABLE</th>
+				<th class="arial justify col">NOMBRE</th>
 				<th class="gap"></th>
 				<th class="arial justify col">CARGO</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td class="arial justify">{{ $baja->autoriza }}</td>
+				<td class="arial">{{ $baja->autoriza->nombre}}</td>
 				<td class="arial justify"></td>
-				<td class="arial justify">Santiago Andrés Pereira</td>
+				<td class="arial">{{ $baja->autoriza->cargo->nombre}} {{ $baja->autoriza->cargo->apellido}}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -97,13 +99,13 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="arial bordes">{{ $equipo->nombre }}</td>
-				<td class="arial bordes">{{ $baja->autoriza }}</td>
+				<td class="arial bordes">{{ $baja->equipo->maquina_id }}-{{ $baja->equipo->nombre }}</td>
+				<td class="arial bordes">{{ $baja->motivo }}</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<p class="justify arial page-break">Los que en la presente participan, dan fe de que se realizó el acto por el que nos encontramos reunidos, con el objeto de levantar la presente acta, para dar de baja los bienes que se detallan en la relación, y declara que como resultado del análisis practicado a la existencia de dichos bienes, se determina que los mismos se encuentran en condiciones inútiles a criterio de los presentes, por lo que su reparación resulta innecesaria, determinándose como destino final ________________________________________________________________.</p>
+	<p class="justify arial page-break">Los que en la presente participan, dan fe de que se realizó el acto por el que nos encontramos reunidos, con el objeto de levantar la presente acta, para dar de baja los bienes que se detallan en la relación, y declara que como resultado del análisis practicado a la existencia de dichos bienes, se determina que los mismos se encuentran en condiciones inútiles a criterio de los presentes, por lo que su reparación resulta innecesaria, determinándose como destino final___________________________________ ________________________________________________________________________.</p>
 	<p class="text-justify arial">Sin nada más que agregar se cierra la presente acta a las                      horas del mismo día de su levantamiento para los fines a que haya lugar.</p>
 
 	<table class="table">

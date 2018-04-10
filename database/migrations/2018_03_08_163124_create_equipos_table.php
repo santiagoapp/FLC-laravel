@@ -33,8 +33,8 @@ class CreateEquiposTable extends Migration
             $table->boolean('diagrama_electrico')->default(false);
             $table->boolean('manual')->default(false);
             $table->string('serie')->nullable();
-            $table->date('fecha_compra')->nullable();
-            $table->date('fecha_primer_uso')->nullable();
+            $table->dateTimeTz('fecha_compra')->nullable();
+            $table->dateTimeTz('fecha_primer_uso')->nullable();
             $table->string('observacion')->nullable();
             $table->string('importancia')->nullable();
 

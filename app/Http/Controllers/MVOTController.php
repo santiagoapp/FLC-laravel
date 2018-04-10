@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\RQ;
-use App\OT;
+use App\MV_OT;
 use Illuminate\Http\Request;
 
-class CalendarioController extends Controller
+class MVOTController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,23 +14,7 @@ class CalendarioController extends Controller
      */
     public function index()
     {
-        // $arr = array();
-        // $result = RQ::whereDate('fecha', '>', date('2017-1-1'));
-        // $result = RQ::whereDate('fecha_generacion', '>' ,'2016-12-31')->get();
-        // $result = OT::all();
-        $result = OT::whereDate('OT.FECHA','>=','2018-1-1')->paginate(10);
-        // var_dump($result);
-        // foreach ($result as $res) {
-
-        //     $arr['id'][] = $res->id;
-        //     $arr['start_date'][] = $res->fecha_entrega;
-        //     $arr['end_date'][] = $res->fecha_entrega;
-        //     $arr['text'][] = $res->autoriza;
-        // }
-
-        // $result = response()->json($arr);
-        // $result = $arr;
-        return view('calendario',compact('result'));
+        //
     }
 
     /**
@@ -58,10 +41,10 @@ class CalendarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\MV_OT  $mV_OT
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(MV_OT $mV_OT)
     {
         //
     }
@@ -69,10 +52,10 @@ class CalendarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\MV_OT  $mV_OT
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MV_OT $mV_OT)
     {
         //
     }
@@ -81,10 +64,10 @@ class CalendarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\MV_OT  $mV_OT
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, MV_OT $mV_OT)
     {
         //
     }
@@ -92,10 +75,10 @@ class CalendarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\MV_OT  $mV_OT
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MV_OT $mV_OT)
     {
         //
     }

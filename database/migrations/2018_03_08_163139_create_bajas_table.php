@@ -16,14 +16,14 @@ class CreateBajasTable extends Migration
         Schema::create('bajas', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('autoriza');
-            $table->string('cargo');
+            $table->integer('autoriza_id')->unsigned();
             $table->string('motivo');
             $table->integer('equipo_id')->unsigned();
             
             $table->foreign('equipo_id')->references('id')->on('equipos');
+            $table->foreign('autoriza_id')->references('id')->on('operarios');
 
-            $table->timestamps();
+            $table->timestampsTz();
         }); 
     }
 // Marzo2018

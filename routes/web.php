@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/asd', function () {
-	return view('prints.acta-de-bajas');
+Route::get('asd', function () {
+	return view('datos.test');
 });
 
 Auth::routes();
@@ -42,6 +42,8 @@ Route::group( ['middleware' => ['auth']], function() {
 	Route::resource('clasificacions', 'ClasificacionController');
 	Route::resource('correctivos', 'CorrectivoController');
 	Route::resource('bajas', 'BajaController');
+	Route::resource('preventivo', 'PreventivoController');
+	Route::resource('test', 'TestController');
 	Route::post('instalaciones/actualizar', 'PlantaController@actualizar');
 	Route::post('instalaciones/eliminar', 'PlantaController@eliminar');
 	Route::post('zonas/eliminar', 'ZonaController@eliminar');

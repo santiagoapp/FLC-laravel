@@ -19,8 +19,8 @@ class CreateRQsTable extends Migration
             $table->integer('ot_id')->unsigned();
             $table->string('solicita');
             $table->string('autoriza');
-            $table->dateTime('fecha_generacion');
-            $table->timestamps();
+            $table->dateTimeTz('fecha_generacion');
+            $table->timestampsTz();
 
             $table->foreign('ot_id')->references('id')->on('o_ts');
         });

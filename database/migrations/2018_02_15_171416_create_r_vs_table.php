@@ -17,10 +17,10 @@ class CreateRVsTable extends Migration
             $table->increments('id');
 
             $table->integer('ot_id')->unsigned();
-            $table->dateTime('expedicion');
-            $table->dateTime('vencimiento');
+            $table->dateTimeTz('expedicion');
+            $table->dateTimeTz('vencimiento');
 
-            $table->timestamps();
+            $table->timestampsTz();
 
             $table->foreign('ot_id')->references('id')->on('o_ts');
         });

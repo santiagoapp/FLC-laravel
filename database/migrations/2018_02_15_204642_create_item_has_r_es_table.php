@@ -21,7 +21,7 @@ class CreateItemHasREsTable extends Migration
 
             $table->string('nota');
 
-            $table->timestamps();
+            $table->timestampsTz();
 
             $table->foreign('re_id')->references('id')->on('r_es');
             $table->foreign('item_id')->references('id')->on('items');

@@ -19,9 +19,9 @@ class CreateOCsTable extends Migration
             $table->string('proveedor');
             $table->string('pago');
             $table->string('nota');
-            $table->dateTime('fecha');
+            $table->dateTimeTz('fecha');
 
-            $table->timestamps();
+            $table->timestampsTz();
         });
     }
 

@@ -19,12 +19,12 @@ class CreateItemHasOTsTable extends Migration
             $table->integer('ot_id')->unsigned();
             $table->integer('item_id')->unsigned();
             $table->string('cantidad');
-            $table->dateTime('fecha_entrega');
+            $table->dateTimeTz('fecha_entrega');
 
             $table->foreign('ot_id')->references('id')->on('o_ts');
             $table->foreign('item_id')->references('id')->on('items');
 
-            $table->timestamps();
+            $table->timestampsTz();
         });
     }
 

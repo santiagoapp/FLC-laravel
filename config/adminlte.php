@@ -118,12 +118,6 @@ return [
             'can'         => 'produccion',
         ],
         [
-            'text'        => 'Gestión de transporte',
-            'url'         => 'reportes',
-            'icon'        => 'bar-chart',
-            'label_color' => 'success',
-        ],
-        [
             'text'        => 'Reportes estadisticos',
             'url'         => 'reportes',
             'icon'        => 'bar-chart',
@@ -271,7 +265,7 @@ return [
         ],
         'RECURSOS HUMANOS',
         [
-            'text'        => 'Personal de planta',
+            'text'        => 'Personal',
             'url'         => 'recursoshumanos',
             'icon'        => 'pie-chart'
         ],
